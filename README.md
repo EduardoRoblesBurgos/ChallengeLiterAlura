@@ -9,4 +9,4 @@
 
 Version Alpha
 
-Próximamente más opciones y monedas
+Próximamente más opciones
