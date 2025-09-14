@@ -1,5 +1,7 @@
 <h1 align="center">Biblioteca LiterAlura</h1>
 
+![Literalura](menu.png)
+
 LiterAlura es una aplicación de consola desarrollada en Java y Spring Boot que funciona como un catálogo de libros que fueron recuperados desde la api Gutendex.
 Permite a los usuarios buscar libros, y guardar información relevante en una base de datos PostgreSQL y realizar diversas consultas sobre los libros y autores almacenados.
 
