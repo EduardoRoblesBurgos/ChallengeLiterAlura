@@ -22,9 +22,8 @@ public class Autor {
 
     // Constructor que puedes usar para crear un nuevo Autor
     public Autor(ModeloAutor modeloAutor) {
-        //this.nombre = modeloAutor.nombre();
         this.nombre = (modeloAutor.nombre().length() > 255 ? modeloAutor.nombre().substring(0,255) : modeloAutor.nombre());
-        this.anoNacimiento = modeloAutor.anoNacimieto();
+        this.anoNacimiento = modeloAutor.anoNacimiento();
         this.anoMuerte = modeloAutor.anoMuerte();
     }
 

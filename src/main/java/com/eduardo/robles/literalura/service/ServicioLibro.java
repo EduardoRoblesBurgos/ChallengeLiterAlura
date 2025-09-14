@@ -33,7 +33,6 @@ public class ServicioLibro {
     public void buscarLibroEnApi(String opcion){
         //Consumo de datos
         var json = consumoAPI.obtenerDatos("https://gutendex.com/books/?search="+opcion.replace(" ","%20"));
-        System.out.println("Este es el json encontrado: " + json + "\n");
         var datos = conversorDelJson.obtenerDatos(json, ModeloBase.class);
         Optional<ModeloLibro> libroBuscado = datos.libro().stream().findFirst();
 

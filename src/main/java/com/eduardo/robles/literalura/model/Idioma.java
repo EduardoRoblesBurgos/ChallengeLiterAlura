@@ -18,7 +18,7 @@ public class Idioma {
     public Idioma() {
     }
 
-    // Constructor que puedes usar para crear un nuevo Autor
+    // Constructor que puedes usar para crear un nuevo Idioma
     public Idioma(String idioma) {
         this.sigla = idioma;
     }
