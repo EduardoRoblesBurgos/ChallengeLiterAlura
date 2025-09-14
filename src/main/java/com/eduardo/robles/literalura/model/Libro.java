@@ -33,7 +33,8 @@ public class Libro {
 
     public Libro(ModeloLibro modeloLibro) {
         this.idLibro = modeloLibro.idLibro();
-        this.titulo = modeloLibro.titulo();
+        //this.titulo = modeloLibro.titulo();
+        this.titulo = (modeloLibro.titulo().length() > 255 ? modeloLibro.titulo().substring(0,255) : modeloLibro.titulo());
         this.autores = modeloLibro.autores().stream()
                 .map(a -> new Autor(a))
                 .collect(Collectors.toList());
