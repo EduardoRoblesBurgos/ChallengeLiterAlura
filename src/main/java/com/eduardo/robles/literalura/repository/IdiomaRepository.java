@@ -12,8 +12,7 @@ import java.util.Optional;
 public interface IdiomaRepository extends JpaRepository<Idioma,Long> {
     //Derived Query
     Optional<Idioma> findBySigla(String sigla);
-
-    //Otra forma, usando JPQL (Java Persistence Query Lang
+    //Otra forma, usando JPQL (Java Persistence Query Lang)
     @Query("SELECT i FROM Idioma i WHERE i.sigla = :siglaDelIdioma")
     Optional<Idioma> buscarIdiomaPorSigla(@Param("siglaDelIdioma") String idioma);
 }

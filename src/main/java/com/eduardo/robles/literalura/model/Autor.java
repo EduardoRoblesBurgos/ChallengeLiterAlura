@@ -1,6 +1,5 @@
 package com.eduardo.robles.literalura.model;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ public class Autor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private Integer anoNacimieto;
+    private Integer anoNacimiento;
     private Integer anoMuerte;
     @ManyToMany(mappedBy = "autores", fetch = FetchType.EAGER)
     private List<Libro> libros = new ArrayList<>(); //¡Inicializa la lista aquí!, es una excelente práctica para evitar NullPointerException
@@ -25,7 +24,7 @@ public class Autor {
     public Autor(ModeloAutor modeloAutor) {
         //this.nombre = modeloAutor.nombre();
         this.nombre = (modeloAutor.nombre().length() > 255 ? modeloAutor.nombre().substring(0,255) : modeloAutor.nombre());
-        this.anoNacimieto = modeloAutor.anoNacimieto();
+        this.anoNacimiento = modeloAutor.anoNacimieto();
         this.anoMuerte = modeloAutor.anoMuerte();
     }
 
@@ -45,12 +44,12 @@ public class Autor {
         this.nombre = nombre;
     }
 
-    public Integer getAnoNacimieto() {
-        return anoNacimieto;
+    public Integer getAnoNacimiento() {
+        return anoNacimiento;
     }
 
-    public void setAnoNacimieto(Integer anoNacimieto) {
-        this.anoNacimieto = anoNacimieto;
+    public void setAnoNacimiento(Integer anoNacimiento) {
+        this.anoNacimiento = anoNacimiento;
     }
 
     public Integer getAnoMuerte() {
@@ -74,7 +73,7 @@ public class Autor {
     @Override
     public String toString() {
         return "Nombre: " + nombre +
-                "\nAño de Nacimiento: " + anoNacimieto +
+                "\nAño de Nacimiento: " + anoNacimiento +
                 "\nAño de Muerte: " + anoMuerte;
     }
 }

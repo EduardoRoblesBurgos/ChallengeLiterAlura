@@ -98,16 +98,6 @@ public class Libro {
 
     @Override
     public String toString() {
-//        return "idLibro: " + getIdLibro() + ", Título: " + getTitulo() +
-//                ", Autores: " + getAutores() + ", Idiomas: " + getIdiomas() +
-//                ", Número de descargas = " + getNumeroDescargas();
-//        return "+++++++++++LIBRO+++++++++++++++" +
-//                "\nId: " + idLibro +
-//                "\nTítulo: " + titulo +
-//                "\nAutores: " + autores.stream().map(Autor::getNombre).toList() +
-//                "\nIdiomas: " + idiomas.stream().map(Idioma::getSigla).toList() +
-//                "\nNúmero de descargas = " + numeroDescargas +
-//                "\n+++++++++++++++++++++++++++++++\n";
         return "Id: " + idLibro +
                 "\nTítulo: " + titulo +
                 "\nAutores: " + autores.stream().map(Autor::getNombre).toList() +

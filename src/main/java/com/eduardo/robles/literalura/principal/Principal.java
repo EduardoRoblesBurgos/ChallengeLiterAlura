@@ -96,23 +96,13 @@ public class Principal {
                 opcion = teclado.next().toLowerCase();
 
                 switch (opcion){
-                    case "en":
-                        System.out.println("Opción en: " + opcion);
-                        break;
-                    case "es":
-                        System.out.println("Opción es: " + opcion);
-                        break;
-                    case "fr":
-                        System.out.println("Opción fr: " + opcion);
-                        break;
-                    case "pt":
-                        System.out.println("Opción pt: " + opcion);
+                    case "en", "es", "fr", "pt":
+                        servicioLibro.listarLibrosGuardadosIdioma(opcion);
                         break;
                     case "m":
-                        System.out.println(menu1);
                         break;
                     default:
-                        System.out.println(opcion + ", no está en las opciones. Elija nuevamente:");
+                        System.out.println("\n" + opcion + ", no está en las opciones. Elija nuevamente:");
                         break;
                 }
             } catch (Exception f) {

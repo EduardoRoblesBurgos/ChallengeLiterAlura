@@ -28,12 +28,12 @@ public class ServicioLibro {
     @Autowired
     IdiomaRepository repositorioIdioma;
 
-    //1 busca libro en la api Gutenbex para guardarlo en la bese de datos
+    //1 busca libro en la api Gutenbex para guardarlo en la base de datos
     @Transactional
     public void buscarLibroEnApi(String opcion){
         //Consumo de datos
         var json = consumoAPI.obtenerDatos("https://gutendex.com/books/?search="+opcion.replace(" ","%20"));
-        System.out.println("Este es el json encontrado: " + json);
+        System.out.println("Este es el json encontrado: " + json + "\n");
         var datos = conversorDelJson.obtenerDatos(json, ModeloBase.class);
         Optional<ModeloLibro> libroBuscado = datos.libro().stream().findFirst();
 
@@ -44,7 +44,6 @@ public class ServicioLibro {
                 Optional<Libro> buscarLibro = repositorioLibro.buscarLibro(libroBuscado.get().idLibro());
 
                 if(buscarLibro.isEmpty()){
-                    System.out.println(libroBuscado.get());
                     Libro nuevoLibro = new Libro(libroBuscado.get());
 
                     nuevoLibro.setId(null); //⚠️ importante: evitar conflictos con id asignado manualmente
@@ -55,7 +54,7 @@ public class ServicioLibro {
                     if(autoresAPI.isEmpty()){
                         Autor autorAnonimo = new Autor();
                         autorAnonimo.setNombre("Anonymous");
-                        autorAnonimo.setAnoNacimieto(null);
+                        autorAnonimo.setAnoNacimiento(null);
                         autorAnonimo.setAnoMuerte(null);
                         autoresAPI.add(autorAnonimo);
                     }
@@ -132,7 +131,6 @@ public class ServicioLibro {
                     // integridad referencial.
                     repositorioLibro.save(nuevoLibro);
                     System.out.println("¡Libro guardado en la base de datos!:\n"+nuevoLibro);
-                    //System.out.println(nuevoLibro);
                 } else {
                     System.out.println("Libro ya existe en la base de datos");
                 }
@@ -169,7 +167,6 @@ public class ServicioLibro {
         List<Libro> listaLibros = repositorioLibro.findAll();
 
         if(!listaLibros.isEmpty()){
-            //listaLibros.forEach(System.out::println);
             for(Libro libro:listaLibros){
                 System.out.println("************LIBRO************\n"+libro+"\n***********************\n");
             }
@@ -214,7 +211,7 @@ public class ServicioLibro {
             for (Autor autor : listaAutores) {
                 System.out.println("*****************AUTOR*********************");
                 System.out.println("Nombre: " + autor.getNombre());
-                System.out.println("Año de Nacimiento: " + autor.getAnoNacimieto());
+                System.out.println("Año de Nacimiento: " + autor.getAnoNacimiento());
                 System.out.println("Año de Muerte: " + autor.getAnoMuerte());
 
                 // Se obtiene la lista de títulos directamente de la entidad Autor
@@ -235,10 +232,43 @@ public class ServicioLibro {
 
     //4 lista autores vivos en un año
     public void listarAutoresVivos(int anio){
-        List<Autor> listaAutores = repositorioAutor.findAll();
+        List<Autor> listaAutores = repositorioAutor.buscarAutorVivo(anio);
 
-        System.out.println("Pooof");
+        if(!listaAutores.isEmpty()){
+            for (Autor autor : listaAutores) {
+                System.out.println("*****************AUTOR*********************");
+                System.out.println("Nombre: " + autor.getNombre());
+                System.out.println("Año de Nacimiento: " + autor.getAnoNacimiento());
+                System.out.println("Año de Muerte: " + autor.getAnoMuerte());
 
+                // Se obtiene la lista de títulos directamente de la entidad Autor
+                List<String> titulosLibros = autor.getLibros().stream()
+                        .map(Libro::getTitulo)
+                        .toList();
+                System.out.println("Libros: " + titulosLibros);
+                System.out.println("********************************\n");
+            }
+        } else{
+            System.out.println("No existen autores vivos para el año dado");
+        }
+
+        System.out.println("-------------------\nApriete Enter para mostrar menu principal nuevamente");
+        teclado.nextLine();
+    }
+
+
+
+    //5 lista libros de un idioma
+    public void listarLibrosGuardadosIdioma(String sigla){
+        List<Libro> listaLibros = repositorioLibro.buscarLibrosPorIdioma(sigla);
+
+        if(!listaLibros.isEmpty()){;
+            for(Libro libro:listaLibros){
+                System.out.println("************ LIBRO ************\n"+libro+"\n***********************\n");
+            }
+        } else{
+            System.out.println("Todavía no hay libros en la base de datos en ese idioma");
+        }
         System.out.println("-------------------\nApriete Enter para mostrar menu principal nuevamente");
         teclado.nextLine();
     }
