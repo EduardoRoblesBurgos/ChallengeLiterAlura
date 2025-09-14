@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ConversorDatos implements IConversorDatos {
     private ObjectMapper mapeadorObjetos = new ObjectMapper();
 
-    //Método implementado de la interfaz para deserializar un json
+    //metodo implementado de la interfaz para deserializar un json
     @Override
     public <T> T obtenerDatos(String json, Class<T> clase) {
         try {
